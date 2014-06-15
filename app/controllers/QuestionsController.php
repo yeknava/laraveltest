@@ -100,19 +100,23 @@ class QuestionsController extends BaseController {
 			->with('question', Question::find($id));
 		}
 	}
-	public function putUpdate($id)
+	public function putUpdate()
 	{
-		$id = Input::get('questionid');
+		$id = Input::get('id');
 		if($id != Auth::user()->id) {
 			return Redirect::to('yoursquestion')->with('message', 'Invalid Question');
 		}
 		$validation = Question::validate(Input::all());
 		if($validation->passes()) {
-			Question::update($id, array(
-				'question'=>Input::get('question'),
-				'solved'=>Input::get('solved')
-			));
-			return Redirect::to('question/{id}', $id)->with('message', 'Your Question has been updated');
+			$question = Question::find($id);
+			$question->question = Input::get('question');
+			$question->solved = Input::get('solved');
+			$question->save();
+			// Question::update($id, array(
+			// 	'question'=>Input::get('question'),
+			// 	'solved'=>Input::get('solved')
+			// ));
+			return Redirect::route('question', array('id'=>$id))->with('message', 'Your Question has been updated');
 		} else {
 			return Redirect::to('question/{id}/edit', $id)->withErrors($validation);
 		}

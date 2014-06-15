@@ -20,7 +20,7 @@
 		@elseif($question->solved == 1)
 			{{Form::checkbox('solved', 0, true)}}
 		@endif
-		{{Form::hidden('questionid',$question->id)}}
+		{{Form::hidden('id',$question->id)}}
 		{{Form::submit('Update')}}
 	{{Form::close()}}
 @stop
