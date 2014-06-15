@@ -5,7 +5,7 @@ class QuestionsController extends BaseController {
 
 	protected $layout = 'layouts.master';
 	public function __construct() {
-		$this->beforeFilter('auth', array('only' => 'postAsk'));
+		$this->beforeFilter('auth', array('only' => 'postAsk', 'Yourquestion'));
 	}
 	/**
 	 * Display a listing of the resource.
@@ -62,7 +62,15 @@ class QuestionsController extends BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		return View::make('questions.show')
+			->with('title', 'View Questions')
+			->with('question', Question::find($id));
+	}
+	public function getYourquestion() {
+		return View::make('questions.yourQuestions')
+			->with('title', 'Your Questionss')
+			->with('username', Auth::user()->username)
+			->with('questions', Question::yourQuestion());
 	}
 
 	/**

@@ -17,6 +17,7 @@
 						<li class="btn btn-primary">{{HTML::linkRoute('register', 'Register')}}</li>
 						<li class="btn btn-primary">{{HTML::linkRoute('login', 'Login')}}</li>
 					@else
+						<li class="btn btn-primary">{{HTML::linkRoute('yourQuestion', 'Your Qs')}}</li>
 						<li class="btn btn-primary">{{HTML::linkRoute('logout', 'Logout '.Auth::user()->username)}}</li>
 					@endif
 				</ul>

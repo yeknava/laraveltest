@@ -17,6 +17,8 @@ Route::get('users/login', array('as'=>'login', 'uses'=>'UsersController@login'))
 Route::post('users/login', array('before'=>'csrf', 'uses'=>'UsersController@postLogin'));
 Route::get('users/logout', array('as'=>'logout', 'uses'=>'UsersController@getLogout'));
 Route::post('/', array('before'=>'csrf', 'uses'=>'QuestionsController@post'));
+Route::get('question/{id}', array('as'=>'question', 'uses'=>'QuestionsController@show'));
+Route::get('yoursquestion', array('as'=>'yourQuestion', 'uses'=>'QuestionsController@getYourquestion'));
 // Route::get('/', function()
 // {
 // 	return View::make('hello');

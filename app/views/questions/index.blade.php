@@ -35,7 +35,8 @@
 			<ul>
 				@foreach($questions as $question)
 					<li>
-						{{e(Str::limit($question->question, 35))}} by {{$question->users->first()->username}}
+						{{HTML::linkRoute('question',Str::limit($question->question, 35), $question->id)}}
+						by {{ucfirst($question->user->username)}}
 					</li>
 				@endforeach
 			</ul>

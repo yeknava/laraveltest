@@ -9,10 +9,13 @@ class Question extends Eloquent {
 	public static function validate($data) {
 		return Validator::make($data, static::$rules);
 	}
-	public function users(){
+	public function user(){ //vaghti migim belongs to nabayad esm bezarim ;)
 		return $this->belongsTo('Users');
 	}
 	public static function unsolved() {
 		return static::where('solved', '=', 0)->orderBy('id', 'DESC')->paginate(1);
+	}
+	public static function yourQuestion() {
+		return static::where('user_id', '=', Auth::id())->paginate(1);
 	}
 }
