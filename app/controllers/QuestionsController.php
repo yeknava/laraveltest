@@ -112,13 +112,9 @@ class QuestionsController extends BaseController {
 			$question->question = Input::get('question');
 			$question->solved = Input::get('solved');
 			$question->save();
-			// Question::update($id, array(
-			// 	'question'=>Input::get('question'),
-			// 	'solved'=>Input::get('solved')
-			// ));
 			return Redirect::route('question', array('id'=>$id))->with('message', 'Your Question has been updated');
 		} else {
-			return Redirect::to('question/{id}/edit', $id)->withErrors($validation);
+			return Redirect::route('editQuestion', array('id'=>$id))->withErrors($validation);
 		}
 	}
 
