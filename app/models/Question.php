@@ -18,4 +18,13 @@ class Question extends Eloquent {
 	public static function yourQuestion() {
 		return static::where('user_id', '=', Auth::id())->paginate(1);
 	}
+
+	public function questionBelongsToUser($id) {
+		$question = Question::find($id);
+		if($question->user_id == Auth::user()->id) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

@@ -5,7 +5,7 @@ class QuestionsController extends BaseController {
 
 	protected $layout = 'layouts.master';
 	public function __construct() {
-		$this->beforeFilter('auth', array('only' => 'postAsk', 'Yourquestion'));
+		$this->beforeFilter('auth', array('only' => 'postAsk', 'Yourquestion', 'getEdit', 'putUpdate'));
 	}
 	/**
 	 * Display a listing of the resource.
@@ -73,6 +73,7 @@ class QuestionsController extends BaseController {
 			->with('questions', Question::yourQuestion());
 	}
 
+
 	/**
 	 * Show the form for editing the specified resource.
 	 * GET /questions/{id}/edit
@@ -80,10 +81,43 @@ class QuestionsController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	// private function question_belongs_to_user($id) {
+	// 	$question = Question::find($id);
+	// 	if($question->user_id == Auth::user()->id) {
+	// 		return true;
+	// 	} else {
+	// 		return false;
+	// 	}
+	// }
+	public function getEdit($id = NULL)
 	{
-		//
+		$question = Question::find($id);
+		if($question->user_id != Auth::user()->id) {
+			return Redirect::to('yoursquestion')->with('message', 'Invalid Question');
+		} else {
+		return View::make('questions.edit')
+			->with('title', 'Edit')
+			->with('question', Question::find($id));
+		}
 	}
+	public function putUpdate($id)
+	{
+		$id = Input::get('questionid');
+		if($id != Auth::user()->id) {
+			return Redirect::to('yoursquestion')->with('message', 'Invalid Question');
+		}
+		$validation = Question::validate(Input::all());
+		if($validation->passes()) {
+			Question::update($id, array(
+				'question'=>Input::get('question'),
+				'solved'=>Input::get('solved')
+			));
+			return Redirect::to('question/{id}', $id)->with('message', 'Your Question has been updated');
+		} else {
+			return Redirect::to('question/{id}/edit', $id)->withErrors($validation);
+		}
+	}
+
 
 	/**
 	 * Update the specified resource in storage.
@@ -92,10 +126,10 @@ class QuestionsController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
-	{
-		//
-	}
+	// public function update($id)
+	// {
+	// 	//
+	// }
 
 	/**
 	 * Remove the specified resource from storage.
