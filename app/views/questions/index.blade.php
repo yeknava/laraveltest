@@ -37,6 +37,7 @@
 					<li>
 						{{HTML::linkRoute('question',Str::limit($question->question, 35), $question->id)}}
 						by {{ucfirst($question->user->username)}}
+						- {{str_plural(count($question->answer))}} Answers
 					</li>
 				@endforeach
 			</ul>

@@ -13,5 +13,8 @@ class Users extends Eloquent {
 	public function questions() {
 		return $this->hasMany('Question');
 	}
+	public function answer() {
+		return $this->hasMany('Answer');
+	}
 
 }

@@ -15,8 +15,9 @@ class QuestionsController extends BaseController {
 	 */
 	public function index()
 	{
-		$view = View::make('questions.index');
-		return $view->with('title', 'Make It Snappy - Home')->with('questions', Question::unsolved());
+		return $view = View::make('questions.index')
+			->with('title', 'Make It Snappy - Home')
+			->with('questions', Question::unsolved());
 	}
 	public function post()
 	{
@@ -89,7 +90,7 @@ class QuestionsController extends BaseController {
 	// 		return false;
 	// 	}
 	// }
-	public function getEdit($id = NULL)
+	public function getEdit($id)
 	{
 		$question = Question::find($id);
 		if($question->user_id != Auth::user()->id) {
@@ -103,7 +104,8 @@ class QuestionsController extends BaseController {
 	public function putUpdate()
 	{
 		$id = Input::get('id');
-		if($id != Auth::user()->id) {
+		$question = Question::find($id);
+		if($question->user_id != Auth::user()->id) {
 			return Redirect::to('yoursquestion')->with('message', 'Invalid Question');
 		}
 		$validation = Question::validate(Input::all());

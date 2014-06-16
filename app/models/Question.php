@@ -12,6 +12,9 @@ class Question extends Eloquent {
 	public function user(){ //vaghti migim belongs to nabayad esm bezarim ;)
 		return $this->belongsTo('Users');
 	}
+	public function answer() {
+		return $this->hasMany('Answer');
+	}
 	public static function unsolved() {
 		return static::where('solved', '=', 0)->orderBy('id', 'DESC')->paginate(1);
 	}

@@ -10,7 +10,8 @@
 		<ul>
 			@foreach($questions as $question)
 				<li>
-					{{Str::limit(e($question->question), 40)}} - 
+					{{Str::limit(e($question->question), 40)}} -
+					{{ ($question->solved) ? ("(Solved)") : ("")}}
 					{{HTML::linkroute('editQuestion', 'Edit', $question->id)}} -
 					{{HTML::linkRoute('question', 'show', $question->id)}}
 				</li>

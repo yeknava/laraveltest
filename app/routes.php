@@ -19,6 +19,7 @@ Route::get('users/logout', array('as'=>'logout', 'uses'=>'UsersController@getLog
 Route::post('/', array('before'=>'csrf', 'uses'=>'QuestionsController@post'));
 Route::get('question/{id}', array('as'=>'question', 'uses'=>'QuestionsController@show'));
 Route::get('question/{id}/edit', array('as'=>'editQuestion', 'uses'=>'QuestionsController@getEdit'));
+Route::post('answer', array('before'=>'csrf', 'uses'=>'AnswersController@postCreate'));
 Route::put('question/update', array('before'=>'csrf', 'uses'=>'QuestionsController@putUpdate'));
 Route::get('yoursquestion', array('as'=>'yourQuestion', 'uses'=>'QuestionsController@getYourquestion'));
 // Route::get('/', function()
