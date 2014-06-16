@@ -120,6 +120,19 @@ class QuestionsController extends BaseController {
 		}
 	}
 
+	public function getResults($keyword) {
+		return View::make('questions.results')
+			->with('title', 'Search Results')
+			->with('questions', Question::search($keyword));
+	}
+
+	public function postSearch() {
+		$keyword = Input::get('keyword');
+		if(empty($keyword)) {
+			return Redirect::route('home')->with('message', 'No Keyword entered, try again');
+		}
+		return Redirect::to('results/'.$keyword);
+	}
 
 	/**
 	 * Update the specified resource in storage.

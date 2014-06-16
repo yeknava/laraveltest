@@ -1,14 +1,21 @@
 <html>
 	<head>
-		<title></title>
+		<title>{{$title}}</title>
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 		{{HTML::style('css/bootstrap.min.css')}}
 		{{HTML::style('css/main.css')}}
+		{{HTML::script('/js/application.js')}}
 	</head>
 	<body>
 		<div id="container">
 			<div id="header">
 				{{HTML::link('/', 'Make it snappy!')}}
+				<div id="searchbar">
+					{{Form::open(array('action' => 'QuestionsController@postSearch', 'method' => 'POST'))}}
+						{{Form::text('keyword', 'Search', array('id'=>'keyword'))}}
+						{{Form::submit('Search')}}
+					{{Form::close()}}
+				</div>
 			</div>
 			<div id="nav">
 				<ul>
@@ -31,7 +38,7 @@
 				@yield('content')
 			</div>
 			<div id="footer">
-				$copy; Make it Sanppy!! {{date('Y')}}
+				copyleft {{date('Y')}} :-)
 			</div>
 		</div>
 		{{HTML::script('js/bootstrap.min.js')}}

@@ -22,6 +22,9 @@ Route::get('question/{id}/edit', array('as'=>'editQuestion', 'uses'=>'QuestionsC
 Route::post('answer', array('before'=>'csrf', 'uses'=>'AnswersController@postCreate'));
 Route::put('question/update', array('before'=>'csrf', 'uses'=>'QuestionsController@putUpdate'));
 Route::get('yoursquestion', array('as'=>'yourQuestion', 'uses'=>'QuestionsController@getYourquestion'));
+
+Route::post('search', array('before'=>'csrf', 'uses'=>'QuestionsController@postSearch'));
+Route::get('results/{keyword}', array('uses'=>'QuestionsController@getResults'));
 // Route::get('/', function()
 // {
 // 	return View::make('hello');

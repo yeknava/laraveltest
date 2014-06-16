@@ -21,7 +21,6 @@ class Question extends Eloquent {
 	public static function yourQuestion() {
 		return static::where('user_id', '=', Auth::id())->paginate(1);
 	}
-
 	public function questionBelongsToUser($id) {
 		$question = Question::find($id);
 		if($question->user_id == Auth::user()->id) {
@@ -30,4 +29,8 @@ class Question extends Eloquent {
 			return false;
 		}
 	}
+	public static function search($keyword) {
+		return static::where('question', 'LIKE', '%'.$keyword.'%')->paginate(1);
+	}
+
 }

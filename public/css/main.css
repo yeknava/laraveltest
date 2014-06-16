@@ -13,6 +13,10 @@ body {
 	margin-bottom: 20px;
 	text-align: center;
 }
+#header #searchbar{
+	font-size: 15px;
+	padding: 5px;
+}
 #nav {
 	display: inline-block;
 	text-align: center;
@@ -28,4 +32,9 @@ body {
 }
 #FormErrorMessage {
 	color:red;
+}
+#footer {
+	margin: auto;
+	text-align: center;
+	padding: 10px;
 }
